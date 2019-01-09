@@ -8,7 +8,7 @@
     <h1>INote List</h1>
     <form>
         Search by first Title:
-        <input name="s" type="text"/>
+        <input name="s" type="text" th:value="${stringSave}"/>
         <input type="submit" value="Search"/>
     </form><br/>
     <a th:href="@{/create-inote}">Create a INote</a>
@@ -32,9 +32,9 @@
             </tr>
         </th:block>
         <div>
-            <a th:href="@{'/index'(page=${iNotes.number - 1})}" th:if="${iNotes.hasPrevious()}">Previous</a>
+            <a th:href="@{'/index'(page=${iNotes.number - 1},s=${stringSave})}" th:if="${iNotes.hasPrevious()}">Previous</a>
             <span th:text="${iNotes.number + 1}"></span>/<span th:text="${iNotes.totalPages}"></span>
-            <a th:href="@{'/index'(page=${iNotes.number + 1})}" th:if="${iNotes.hasNext()}">Next</a>
+            <a th:href="@{'/index'(page=${iNotes.number + 1},s=${stringSave})}" th:if="${iNotes.hasNext()}">Next</a>
         </div>
     </table>
 </body>

@@ -19,6 +19,8 @@ import java.util.Optional;
 @Controller
 public class InoteController {
 
+    private String stringSave;
+
     @Autowired
     private INoteService iNoteService;
 
@@ -33,13 +35,15 @@ public class InoteController {
     @GetMapping("/index")
     public ModelAndView showList(@RequestParam("s") Optional<String> s, @PageableDefault(size = 5) Pageable pageable){
         Page<INote> iNotes;
-        if(s.isPresent()){
+        stringSave = s.toString().substring(9,s.toString().length()-1);
+        if(s.isPresent() && !stringSave.equals("empt") && !stringSave.equals("")){
             iNotes = iNoteService.findAllByTitle(s.get(), pageable);
         } else {
             iNotes = iNoteService.findAll(pageable);
         }
         ModelAndView modelAndView = new ModelAndView("inote/list");
         modelAndView.addObject("iNotes", iNotes);
+        modelAndView.addObject("stringSave", stringSave);
 //        Iterable<INote> iNotes = iNoteService.findAll();
 //        modelAndView.addObject("iNotes", iNotes);
         return modelAndView;
