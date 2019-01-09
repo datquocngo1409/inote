@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Notetype List</title>
+</head>
+<body>
+    <h1>Notetype List</h1>
+    <a href="/create-notetype">Create a Notetype!</a>
+    <table border="1">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+        <th:block th:each="notetype : ${notetypes}">
+            <tr>
+                <td th:text="${notetype.getId()}"></td>
+                <td th:text="${notetype.getName()}"></td>
+                <td th:text="${notetype.getDescription()}"></td>
+                <td><a th:href="@{/edit-notetype/__${notetype.getId()}__}">Edit</a></td>
+                <td><a th:href="@{/delete-notetype/__${notetype.getId()}__}">Delete</a></td>
+            </tr>
+        </th:block>
+    </table>
+</body>
+</html>

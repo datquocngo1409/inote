@@ -12,6 +12,7 @@
             <td>ID</td>
             <td>Title</td>
             <td>Content</td>
+            <td>Notetype</td>
             <td>Edit</td>
             <td>Delete</td>
         </tr>
@@ -20,10 +21,16 @@
                 <td th:text="${inote.id}"></td>
                 <td th:text="${inote.getTitle()}"></td>
                 <td th:text="${inote.getContent()}"></td>
+                <td><a th:href="@{/edit-notetype/__${inote.notetype.getId()}__}" th:text="${inote.notetype.name}"></a></td>
                 <td><a th:href="@{/edit/__${inote.getId()}__}">Edit</a></td>
                 <td><a th:href="@{/delete/__${inote.getId()}__}">Delete</a></td>
             </tr>
         </th:block>
+        <div>
+            <a th:href="@{'/index'(page=${iNotes.number - 1})}" th:if="${iNotes.hasPrevious()}">Previous</a>
+            <span th:text="${iNotes.number + 1}"></span>/<span th:text="${iNotes.totalPages}"></span>
+            <a th:href="@{'/index'(page=${iNotes.number + 1})}" th:if="${iNotes.hasNext()}">Next</a>
+        </div>
     </table>
 </body>
 </html>

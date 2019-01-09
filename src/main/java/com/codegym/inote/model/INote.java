@@ -1,16 +1,18 @@
 package com.codegym.inote.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
+@Table(name = "inote")
 public class INote {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "notetype_id")
+    private Notetype notetype;
 
     private String title;
 
@@ -19,7 +21,8 @@ public class INote {
     public INote() {
     }
 
-    public INote( String title, String content) {
+    public INote(Notetype notetype, String title, String content) {
+        this.notetype = notetype;
         this.title = title;
         this.content = content;
     }
@@ -46,5 +49,13 @@ public class INote {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Notetype getNotetype() {
+        return notetype;
+    }
+
+    public void setNotetype(Notetype notetype) {
+        this.notetype = notetype;
     }
 }

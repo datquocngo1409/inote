@@ -5,6 +5,8 @@ import com.codegym.inote.repository.INoteRepository;
 import com.codegym.inote.service.INoteService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public class INoteServiceImpl implements INoteService {
 
@@ -12,8 +14,8 @@ public class INoteServiceImpl implements INoteService {
     INoteRepository iNoteRepository;
 
     @Override
-    public Iterable<INote> findAll() {
-        return iNoteRepository.findAll();
+    public Page<INote> findAll(Pageable pageable) {
+        return iNoteRepository.findAll(pageable);
     }
 
     @Override
