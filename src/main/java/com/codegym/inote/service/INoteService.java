@@ -12,4 +12,6 @@ public interface INoteService {
     void save(INote iNote);
 
     void remove(Long id);
+
+    Page<INote> findAllByTitle(String s, Pageable pageable);
 }

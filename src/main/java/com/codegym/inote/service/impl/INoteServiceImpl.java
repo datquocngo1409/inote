@@ -32,4 +32,9 @@ public class INoteServiceImpl implements INoteService {
     public void remove(Long id) {
         iNoteRepository.deleteById(id);
     }
+
+    @Override
+    public Page<INote> findAllByTitle(String s, Pageable pageable) {
+        return iNoteRepository.findAllByTitle(s, pageable);
+    }
 }

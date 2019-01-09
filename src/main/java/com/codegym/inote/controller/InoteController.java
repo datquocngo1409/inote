@@ -11,11 +11,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 public class InoteController {
@@ -32,9 +31,14 @@ public class InoteController {
     }
 
     @GetMapping("/index")
-    public ModelAndView showList(@PageableDefault(size = 5) Pageable pageable){
+    public ModelAndView showList(@RequestParam("s") Optional<String> s, @PageableDefault(size = 5) Pageable pageable){
+        Page<INote> iNotes;
+        if(s.isPresent()){
+            iNotes = iNoteService.findAllByTitle(s.get(), pageable);
+        } else {
+            iNotes = iNoteService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("inote/list");
-        Page<INote> iNotes = iNoteService.findAll(pageable);
         modelAndView.addObject("iNotes", iNotes);
 //        Iterable<INote> iNotes = iNoteService.findAll();
 //        modelAndView.addObject("iNotes", iNotes);
