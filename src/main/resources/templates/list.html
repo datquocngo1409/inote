@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List INote</title>
+</head>
+<body>
+    <h1>INote List</h1>
+    <a th:href="@{/create-inote}">Create a INote</a>
+    <table border="1">
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Content</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+        <th:block th:each="inote : ${iNotes}">
+            <tr>
+                <td th:text="${inote.id}"></td>
+                <td th:text="${inote.getTitle()}"></td>
+                <td th:text="${inote.getContent()}"></td>
+                <td><a th:href="@{/edit/__${inote.getId()}__}">Edit</a></td>
+                <td><a th:href="@{/delete/__${inote.getId()}__}">Delete</a></td>
+            </tr>
+        </th:block>
+    </table>
+</body>
+</html>

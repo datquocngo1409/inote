@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete INote</title>
+</head>
+<body>
+    <a href="/index">Back to List</a>
+    <form th:action="@{/delete}" th:object="${iNote}" th:method="post">
+        <table>
+            <tr>
+                <input type="hidden" th:field="*{id}">
+            </tr>
+            <tr>
+                <td>Title:      </td>
+                <td><input th:text="${iNote.title}" th:field="*{title}"></td>
+            </tr>
+            <tr>
+                <td>Content:    </td>
+                <td><input th:text="${iNote.content}" th:field="*{content}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" th:value="Delete"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
